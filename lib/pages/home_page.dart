@@ -476,7 +476,8 @@ class _HomePageState extends State<HomePage> {
         onPressed: () {
           setState(() {
             noteList.insert(index, deletedNote);
-            Preference.storeNoteList(noteList);
+            storeNote();
+            _loadNoteList();
           });
         },
       ),
