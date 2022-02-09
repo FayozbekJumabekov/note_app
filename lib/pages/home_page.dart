@@ -138,6 +138,8 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+
+  /// # awesome dialog to create note
   IconButton awesomeDialog(BuildContext context) {
     return IconButton(
         onPressed: () {
@@ -250,6 +252,7 @@ class _HomePageState extends State<HomePage> {
         ));
   }
 
+  /// # note items ui
   Widget noteItems(BuildContext context, Note note, index) {
     return Container(
       color: (checkedits[index]) ? Colors.blue.shade100 : Colors.transparent,
@@ -320,6 +323,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  /// # edit awesome button
   IconButton editButton(BuildContext context, int index) {
     return IconButton(
         onPressed: () {
@@ -429,6 +433,7 @@ class _HomePageState extends State<HomePage> {
         icon: Icon(Icons.edit));
   }
 
+  /// # Slide to delete function
   Widget slideLeftBackground() {
     return Container(
       color: Colors.red,
@@ -458,6 +463,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  /// # Snackbar
   void showSnackBar(BuildContext context, int index) {
     var deletedNote = noteList[index];
     setState(() {
