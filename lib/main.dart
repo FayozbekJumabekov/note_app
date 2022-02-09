@@ -34,6 +34,7 @@ class _MyAppState extends State<MyApp> {
                 iconTheme: IconThemeData(color: Colors.white)),
             textTheme: TextTheme(
               bodyText2: TextStyle(color: Colors.black),
+                subtitle2: TextStyle(color: Colors.black),
                 caption: TextStyle(color: Colors.grey.shade800)
 
             ),
@@ -44,7 +45,7 @@ class _MyAppState extends State<MyApp> {
             scaffoldBackgroundColor: Colors.black,
             dividerColor: Colors.grey.shade500,
             textTheme: TextTheme(
-
+                subtitle2: TextStyle(color: Colors.grey.shade200),
               bodyText2: TextStyle(color: Colors.grey)
             ),
 

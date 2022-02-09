@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
   late List<bool> checkedits = List.generate(noteList.length, (index) => false);
   bool editText = false;
 
-  bool themeMode = true;
+  bool themeMode = false;
 
   List<Note> noteList = [];
 
@@ -101,8 +101,8 @@ class _HomePageState extends State<HomePage> {
               : SizedBox.shrink(),
           IconButton(
               onPressed: () {
-                themeMode  ? MyApp.of(context)?.changeTheme(ThemeMode.light) :  MyApp.of(context)?.changeTheme(ThemeMode.dark);
                 setState(() {
+                  themeMode  ? MyApp.of(context)?.changeTheme(ThemeMode.light) :  MyApp.of(context)?.changeTheme(ThemeMode.dark);
                   themeMode = !themeMode;
                 });
               },
@@ -143,17 +143,24 @@ class _HomePageState extends State<HomePage> {
         onPressed: () {
           late AwesomeDialog dialog;
           dialog = AwesomeDialog(
+            dialogBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
             context: context,
             animType: AnimType.SCALE,
             dialogType: DialogType.NO_HEADER,
             keyboardAware: true,
+            onDissmissCallback: (DismissType){
+              setState(() {
+                contentController.clear();
+                titleController.clear();
+              });
+            },
             body: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: <Widget>[
                   Text(
                     'Create Note',
-                    style: Theme.of(context).textTheme.headline6,
+                    style: TextStyle(color: Theme.of(context).textTheme.bodyText2!.color),
                   ),
                   SizedBox(
                     height: 10,
@@ -163,12 +170,16 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.blueGrey.withAlpha(40),
                     child: TextFormField(
                       controller: titleController,
+                      style: TextStyle(color: Theme.of(context).textTheme.subtitle2!.color),
                       autofocus: true,
                       minLines: 1,
                       decoration: InputDecoration(
+
                         border: InputBorder.none,
                         labelText: 'Title',
-                        prefixIcon: Icon(Icons.text_fields),
+                        labelStyle: TextStyle(color: Theme.of(context).listTileTheme.textColor),
+
+                        prefixIcon: Icon(Icons.text_fields,color: Theme.of(context).appBarTheme.iconTheme!.color,),
                       ),
                     ),
                   ),
@@ -180,6 +191,7 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.blueGrey.withAlpha(40),
                     child: TextFormField(
                       controller: contentController,
+                      style: TextStyle(color: Theme.of(context).textTheme.subtitle2!.color),
                       autofocus: true,
                       keyboardType: TextInputType.multiline,
                       maxLengthEnforced: true,
@@ -188,7 +200,8 @@ class _HomePageState extends State<HomePage> {
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         labelText: 'Content',
-                        prefixIcon: Icon(Icons.text_fields),
+                        labelStyle: TextStyle(color: Theme.of(context).listTileTheme.textColor),
+                        prefixIcon: Icon(Icons.text_fields,color: Theme.of(context).appBarTheme.iconTheme!.color,),
                       ),
                     ),
                   ),
@@ -378,6 +391,10 @@ class _HomePageState extends State<HomePage> {
                             text: 'Close',
                             pressEvent: () {
                               dialog.dismiss();
+                              setState(() {
+                                contentController.clear();
+                                titleController.clear();
+                              });
                             }),
                       ),
                       SizedBox(
