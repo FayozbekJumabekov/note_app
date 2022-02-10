@@ -340,6 +340,12 @@ class _HomePageState extends State<HomePage> {
             animType: AnimType.SCALE,
             dialogType: DialogType.INFO_REVERSED,
             keyboardAware: true,
+            onDissmissCallback: (DismissType){
+              setState(() {
+                contentController.clear();
+                titleController.clear();
+              });
+            },
             body: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
