@@ -336,23 +336,18 @@ class _HomePageState extends State<HomePage> {
           });
           late AwesomeDialog dialog;
           dialog = AwesomeDialog(
+            dialogBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
             context: context,
             animType: AnimType.SCALE,
             dialogType: DialogType.INFO_REVERSED,
             keyboardAware: true,
-            onDissmissCallback: (DismissType){
-              setState(() {
-                contentController.clear();
-                titleController.clear();
-              });
-            },
             body: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: <Widget>[
                   Text(
                     'Edit Note',
-                    style: Theme.of(context).textTheme.headline6,
+                    style: TextStyle(color: Theme.of(context).textTheme.bodyText2!.color),
                   ),
                   SizedBox(
                     height: 10,
@@ -364,11 +359,13 @@ class _HomePageState extends State<HomePage> {
                       controller: titleController
                         ..text = (editText) ? noteList[index].title : "",
                       autofocus: true,
+                      style: TextStyle(color: Theme.of(context).textTheme.subtitle2!.color),
                       minLines: 1,
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         labelText: 'Title',
-                        prefixIcon: Icon(Icons.text_fields),
+                        labelStyle: TextStyle(color: Theme.of(context).listTileTheme.textColor),
+                        prefixIcon: Icon(Icons.text_fields,color: Theme.of(context).appBarTheme.iconTheme!.color,),
                       ),
                     ),
                   ),
@@ -381,6 +378,7 @@ class _HomePageState extends State<HomePage> {
                     child: TextFormField(
                       controller: contentController
                         ..text = (editText) ? noteList[index].content : "",
+                      style: TextStyle(color: Theme.of(context).textTheme.subtitle2!.color),
                       autofocus: true,
                       keyboardType: TextInputType.multiline,
                       maxLengthEnforced: true,
@@ -389,7 +387,8 @@ class _HomePageState extends State<HomePage> {
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         labelText: 'Content',
-                        prefixIcon: Icon(Icons.text_fields),
+                        labelStyle: TextStyle(color: Theme.of(context).listTileTheme.textColor),
+                        prefixIcon: Icon(Icons.text_fields,color: Theme.of(context).appBarTheme.iconTheme!.color,),
                       ),
                     ),
                   ),
