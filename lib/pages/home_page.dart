@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
   late List<bool> checkedits = List.generate(noteList.length, (index) => false);
   bool editText = false;
 
-  bool themeMode = false;
+  bool isDarkMode = false;
 
   List<Note> noteList = [];
 
@@ -54,7 +54,7 @@ class _HomePageState extends State<HomePage> {
   void _loadNoteList() async {
     await Preference.loadNoteList().then((list) => {
           setState(() {
-            noteList = list;
+            noteList = list!;
           })
         });
   }
@@ -77,9 +77,12 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+
+
   @override
   void initState() {
     _loadNoteList();
+    Preference.loadThemeMode();
     super.initState();
   }
 
@@ -102,12 +105,13 @@ class _HomePageState extends State<HomePage> {
           IconButton(
               onPressed: () {
                 setState(() {
-                  themeMode  ? MyApp.of(context)?.changeTheme(ThemeMode.light) :  MyApp.of(context)?.changeTheme(ThemeMode.dark);
-                  themeMode = !themeMode;
+                  isDarkMode = !isDarkMode;
+                  isDarkMode  ? MyApp.of(context)?.changeTheme(ThemeMode.dark) :  MyApp.of(context)?.changeTheme(ThemeMode.light);
+                  Preference.storeThemeMode(isDarkMode);
                 });
               },
               icon:
-                  (themeMode) ? Icon(Icons.light_mode) : Icon(Icons.dark_mode))
+                  (isDarkMode) ?  Icon(Icons.light_mode) : Icon(Icons.dark_mode))
         ],
       ),
       body: Builder(builder: (context) {

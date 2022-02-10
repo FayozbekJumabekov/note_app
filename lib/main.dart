@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:note_app/pages/home_page.dart';
+import 'package:note_app/services/pref_service.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +19,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
 
-  ThemeMode _themeMode = ThemeMode.system;
+    ThemeMode _themeMode  = ThemeMode.system ;
 
   @override
   Widget build(BuildContext context) {
